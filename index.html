@@ -95,12 +95,14 @@
         map.addLayer(layer_ESRISatellite_0);
         map.createPane('pane_OSMStandard_1');
         map.getPane('pane_OSMStandard_1').style.zIndex = 401;
-        var Jawg_Terrain = L.tileLayer('https://{s}.tile.jawg.io/jawg-terrain/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
-            attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            minZoom: 0,
-            maxZoom: 22,
-            subdomains: 'abcd',
-            accessToken: '<your accessToken>'
+        var layer_OSMStandard_1 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_1',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 5,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
         });
         layer_OSMStandard_1;
         map.addLayer(layer_OSMStandard_1);
