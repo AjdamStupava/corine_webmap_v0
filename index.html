@@ -8,9 +8,6 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-search.css">
-        <link rel="stylesheet" href="css/filter.css">
-<link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
@@ -35,11 +32,8 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="js/leaflet-search.js"></script>
-        <script src="js/tailDT.js"></script>
-<script src="js/nouislider.min.js"></script>
-<script src="js/wNumb.js"></script>
         <script src="data/postal_codes_clipped_2.js"></script>
+        <script src="data/ecosystem_service_sites_clipped_3.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -47,11 +41,11 @@
 
             if (e.target.feature.geometry.type === 'LineString') {
               highlightLayer.setStyle({
-                color: '#03fc9d',
+                color: '#ffff00',
               });
             } else {
               highlightLayer.setStyle({
-                fillColor: '#03fc9d',
+                fillColor: '#ffff00',
                 fillOpacity: 1
               });
             }
@@ -120,14 +114,16 @@
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>postinumer</strong><br />' + (feature.properties['postinumer'] !== null ? autolinker.link(feature.properties['postinumer'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">postinumer</th>\
+                        <td>' + (feature.properties['postinumer'] !== null ? autolinker.link(feature.properties['postinumer'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">nimi</th>\
                         <td>' + (feature.properties['nimi'] !== null ? autolinker.link(feature.properties['nimi'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['namn'] !== null ? autolinker.link(feature.properties['namn'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">namn</th>\
+                        <td>' + (feature.properties['namn'] !== null ? autolinker.link(feature.properties['namn'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">he_vakiy</th>\
@@ -218,8 +214,10 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_postal_codes_clipped_2_0() {
-            return {
+        function style_postal_codes_clipped_2_0(feature) {
+            switch(String(feature.properties['top_'])) {
+                case 'place_emot':
+                    return {
                 pane: 'pane_postal_codes_clipped_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -229,8 +227,190 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(249,181,70,1.0)',
+                fillColor: 'rgba(215,25,28,1.0)',
                 interactive: true,
+            }
+                    break;
+                case 'place_hike':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,75,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_chil':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,124,74,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_na_o':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_natu':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,201,128,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_outd':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,228,160,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_pets':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_reli':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,244,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_smel':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,232,173,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_soci':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_soun':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,191,171,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'place_spor':
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(86,161,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_postal_codes_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(113,113,113,1.0)',
+                interactive: true,
+            }
+                    break;
             }
         }
         map.createPane('pane_postal_codes_clipped_2');
@@ -247,725 +427,149 @@
         });
         bounds_group.addLayer(layer_postal_codes_clipped_2);
         map.addLayer(layer_postal_codes_clipped_2);
-        var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/postal_codes_clipped_2.png" /> postal_codes_clipped': layer_postal_codes_clipped_2,"OSM Standard": layer_OSMStandard_1,"ESRI Satellite": layer_ESRISatellite_0,}).addTo(map);
-        setBounds();
-        map.addControl(new L.Control.Search({
-            layer: layer_postal_codes_clipped_2,
-            initial: false,
-            hideMarkerOnCollapse: true,
-            propertyName: 'id'}));
-        document.getElementsByClassName('search-button')[0].className +=
-         ' fa fa-binoculars';
-        var mapDiv = document.getElementById('map');
-        var row = document.createElement('div');
-        row.className="row";
-        row.id="all";
-        row.style.height = "100%";
-        var col1 = document.createElement('div');
-        col1.className="col9";
-        col1.id = "mapWindow";
-        col1.style.height = "99%";
-        col1.style.width = "80%";
-        col1.style.display = "inline-block";
-        var col2 = document.createElement('div');
-        col2.className="col3";
-        col2.id = "menu";
-        col2.style.display = "inline-block";
-        mapDiv.parentNode.insertBefore(row, mapDiv);
-        document.getElementById("all").appendChild(col1);
-        document.getElementById("all").appendChild(col2);
-        col1.appendChild(mapDiv)
-        var Filters = {"place_soci": "int","place_beau": "int","place_walk": "int","place_reli": "int","place_chil": "int","place_pets": "int","place_na_o": "int","place_spor": "int","place_natu": "int","place_soun": "int","place_hike": "int","place_smel": "int","place_outd": "int","place_rela": "int","place_emot": "int"};
-        function filterFunc() {
-          map.eachLayer(function(lyr){
-          if ("options" in lyr && "dataVar" in lyr["options"]){
-            features = this[lyr["options"]["dataVar"]].features.slice(0);
-            try{
-              for (key in Filters){
-                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
-                if (Filters[key] == "str" || Filters[key] == "bool"){
-                  var selection = [];
-                  var options = document.getElementById("sel_" + keyS).options
-                  for (var i=0; i < options.length; i++) {
-                    if (options[i].selected) selection.push(options[i].value);
-                  }
-                    try{
-                      if (key in features[0].properties){
-                        for (i = features.length - 1;
-                          i >= 0; --i){
-                          if (selection.indexOf(
-                          features[i].properties[key])<0
-                          && selection.length>0) {
-                          features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                  }
-                }
-                if (Filters[key] == "int"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (parseInt(features[i].properties[key])
-                          < sliderVals[0]
-                          || parseInt(features[i].properties[key])
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
+        function pop_ecosystem_service_sites_clipped_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
                     }
-                  }
-                if (Filters[key] == "real"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (features[i].properties[key]
-                          < sliderVals[0]
-                          || features[i].properties[key]
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                    }
-                  }
-                if (Filters[key] == "date"
-                  || Filters[key] == "datetime"
-                  || Filters[key] == "time"){
-                  try{
-                    if (key in features[0].properties){
-                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
-                      startdate = document.getElementById("dat_" +
-                        HTMLkey + "_date1").value.replace(" ", "T");
-                      enddate = document.getElementById("dat_" +
-                        HTMLkey + "_date2").value.replace(" ", "T");
-                      for (i = features.length - 1; i >= 0; --i){
-                        if (features[i].properties[key] < startdate
-                          || features[i].properties[key] > enddate){
-                          features.splice(i,1);
-                        }
-                      }
-                    }
-                  } catch(err){
-                  }
-                }
-              }
-            } catch(err){
-            }
-          this[lyr["options"]["layerName"]].clearLayers();
-          this[lyr["options"]["layerName"]].addData(features);
-          }
-          })
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['respondent'] !== null ? autolinker.link(feature.properties['respondent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['createtion'] !== null ? autolinker.link(feature.properties['createtion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['geoanswer'] !== null ? autolinker.link(feature.properties['geoanswer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_outd'] !== null ? autolinker.link(feature.properties['place_outd'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_spor'] !== null ? autolinker.link(feature.properties['place_spor'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_natu'] !== null ? autolinker.link(feature.properties['place_natu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_hike'] !== null ? autolinker.link(feature.properties['place_hike'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_na_o'] !== null ? autolinker.link(feature.properties['place_na_o'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_rela'] !== null ? autolinker.link(feature.properties['place_rela'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_soci'] !== null ? autolinker.link(feature.properties['place_soci'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_beau'] !== null ? autolinker.link(feature.properties['place_beau'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_soun'] !== null ? autolinker.link(feature.properties['place_soun'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_smel'] !== null ? autolinker.link(feature.properties['place_smel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_reli'] !== null ? autolinker.link(feature.properties['place_reli'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_emot'] !== null ? autolinker.link(feature.properties['place_emot'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_chil'] !== null ? autolinker.link(feature.properties['place_chil'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_pets'] !== null ? autolinker.link(feature.properties['place_pets'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_walk'] !== null ? autolinker.link(feature.properties['place_walk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_cult'] !== null ? autolinker.link(feature.properties['place_cult'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_biod'] !== null ? autolinker.link(feature.properties['place_biod'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_ever'] !== null ? autolinker.link(feature.properties['place_ever'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_wate'] !== null ? autolinker.link(feature.properties['place_wate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_othe'] !== null ? autolinker.link(feature.properties['place_othe'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_ot_1'] !== null ? autolinker.link(feature.properties['place_ot_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['place_desc'] !== null ? autolinker.link(feature.properties['place_desc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['how_often'] !== null ? autolinker.link(feature.properties['how_often'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['covid_oftr'] !== null ? autolinker.link(feature.properties['covid_oftr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arriving'] !== null ? autolinker.link(feature.properties['arriving'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['whenv2_1'] !== null ? autolinker.link(feature.properties['whenv2_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
         }
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_soci = document.createElement("div");
-            div_place_soci.id = "div_place_soci";
-            div_place_soci.className = "slider";
-            document.getElementById("menu").appendChild(div_place_soci);
-            var lab_place_soci = document.createElement('div');
-            lab_place_soci.innerHTML  = 'place_soci: <span id="val_place_soci"></span>';
-            lab_place_soci.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_soci);
-            var reset_place_soci = document.createElement('div');
-            reset_place_soci.innerHTML = 'clear filter';
-            reset_place_soci.className = 'filterlabel';
-            lab_place_soci.className = 'filterlabel';
-            reset_place_soci.onclick = function() {
-                sel_place_soci.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_soci);
-            var sel_place_soci = document.getElementById('div_place_soci');
-            noUiSlider.create(sel_place_soci, {
-                connect: true,
-                start: [NULL, 85],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 85
-                }
-            });
-            sel_place_soci.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
+
+        function style_ecosystem_service_sites_clipped_3_0() {
+            return {
+                pane: 'pane_ecosystem_service_sites_clipped_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,158,23,1.0)',
+                interactive: true,
             }
-            val_place_soci = document.getElementById('val_place_soci');
-            val_place_soci.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_beau = document.createElement("div");
-            div_place_beau.id = "div_place_beau";
-            div_place_beau.className = "slider";
-            document.getElementById("menu").appendChild(div_place_beau);
-            var lab_place_beau = document.createElement('div');
-            lab_place_beau.innerHTML  = 'place_beau: <span id="val_place_beau"></span>';
-            lab_place_beau.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_beau);
-            var reset_place_beau = document.createElement('div');
-            reset_place_beau.innerHTML = 'clear filter';
-            reset_place_beau.className = 'filterlabel';
-            lab_place_beau.className = 'filterlabel';
-            reset_place_beau.onclick = function() {
-                sel_place_beau.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_beau);
-            var sel_place_beau = document.getElementById('div_place_beau');
-            noUiSlider.create(sel_place_beau, {
-                connect: true,
-                start: [NULL, 201],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 201
-                }
-            });
-            sel_place_beau.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_beau = document.getElementById('val_place_beau');
-            val_place_beau.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_walk = document.createElement("div");
-            div_place_walk.id = "div_place_walk";
-            div_place_walk.className = "slider";
-            document.getElementById("menu").appendChild(div_place_walk);
-            var lab_place_walk = document.createElement('div');
-            lab_place_walk.innerHTML  = 'place_walk: <span id="val_place_walk"></span>';
-            lab_place_walk.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_walk);
-            var reset_place_walk = document.createElement('div');
-            reset_place_walk.innerHTML = 'clear filter';
-            reset_place_walk.className = 'filterlabel';
-            lab_place_walk.className = 'filterlabel';
-            reset_place_walk.onclick = function() {
-                sel_place_walk.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_walk);
-            var sel_place_walk = document.getElementById('div_place_walk');
-            noUiSlider.create(sel_place_walk, {
-                connect: true,
-                start: [NULL, 207],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 207
-                }
-            });
-            sel_place_walk.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_walk = document.getElementById('val_place_walk');
-            val_place_walk.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_reli = document.createElement("div");
-            div_place_reli.id = "div_place_reli";
-            div_place_reli.className = "slider";
-            document.getElementById("menu").appendChild(div_place_reli);
-            var lab_place_reli = document.createElement('div');
-            lab_place_reli.innerHTML  = 'place_reli: <span id="val_place_reli"></span>';
-            lab_place_reli.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_reli);
-            var reset_place_reli = document.createElement('div');
-            reset_place_reli.innerHTML = 'clear filter';
-            reset_place_reli.className = 'filterlabel';
-            lab_place_reli.className = 'filterlabel';
-            reset_place_reli.onclick = function() {
-                sel_place_reli.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_reli);
-            var sel_place_reli = document.getElementById('div_place_reli');
-            noUiSlider.create(sel_place_reli, {
-                connect: true,
-                start: [NULL, 6],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 6
-                }
-            });
-            sel_place_reli.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_reli = document.getElementById('val_place_reli');
-            val_place_reli.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_chil = document.createElement("div");
-            div_place_chil.id = "div_place_chil";
-            div_place_chil.className = "slider";
-            document.getElementById("menu").appendChild(div_place_chil);
-            var lab_place_chil = document.createElement('div');
-            lab_place_chil.innerHTML  = 'place_chil: <span id="val_place_chil"></span>';
-            lab_place_chil.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_chil);
-            var reset_place_chil = document.createElement('div');
-            reset_place_chil.innerHTML = 'clear filter';
-            reset_place_chil.className = 'filterlabel';
-            lab_place_chil.className = 'filterlabel';
-            reset_place_chil.onclick = function() {
-                sel_place_chil.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_chil);
-            var sel_place_chil = document.getElementById('div_place_chil');
-            noUiSlider.create(sel_place_chil, {
-                connect: true,
-                start: [NULL, 30],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 30
-                }
-            });
-            sel_place_chil.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_chil = document.getElementById('val_place_chil');
-            val_place_chil.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_pets = document.createElement("div");
-            div_place_pets.id = "div_place_pets";
-            div_place_pets.className = "slider";
-            document.getElementById("menu").appendChild(div_place_pets);
-            var lab_place_pets = document.createElement('div');
-            lab_place_pets.innerHTML  = 'place_pets: <span id="val_place_pets"></span>';
-            lab_place_pets.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_pets);
-            var reset_place_pets = document.createElement('div');
-            reset_place_pets.innerHTML = 'clear filter';
-            reset_place_pets.className = 'filterlabel';
-            lab_place_pets.className = 'filterlabel';
-            reset_place_pets.onclick = function() {
-                sel_place_pets.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_pets);
-            var sel_place_pets = document.getElementById('div_place_pets');
-            noUiSlider.create(sel_place_pets, {
-                connect: true,
-                start: [NULL, 44],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 44
-                }
-            });
-            sel_place_pets.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_pets = document.getElementById('val_place_pets');
-            val_place_pets.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_na_o = document.createElement("div");
-            div_place_na_o.id = "div_place_na_o";
-            div_place_na_o.className = "slider";
-            document.getElementById("menu").appendChild(div_place_na_o);
-            var lab_place_na_o = document.createElement('div');
-            lab_place_na_o.innerHTML  = 'place_na_o: <span id="val_place_na_o"></span>';
-            lab_place_na_o.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_na_o);
-            var reset_place_na_o = document.createElement('div');
-            reset_place_na_o.innerHTML = 'clear filter';
-            reset_place_na_o.className = 'filterlabel';
-            lab_place_na_o.className = 'filterlabel';
-            reset_place_na_o.onclick = function() {
-                sel_place_na_o.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_na_o);
-            var sel_place_na_o = document.getElementById('div_place_na_o');
-            noUiSlider.create(sel_place_na_o, {
-                connect: true,
-                start: [NULL, 94],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 94
-                }
-            });
-            sel_place_na_o.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_na_o = document.getElementById('val_place_na_o');
-            val_place_na_o.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_spor = document.createElement("div");
-            div_place_spor.id = "div_place_spor";
-            div_place_spor.className = "slider";
-            document.getElementById("menu").appendChild(div_place_spor);
-            var lab_place_spor = document.createElement('div');
-            lab_place_spor.innerHTML  = 'place_spor: <span id="val_place_spor"></span>';
-            lab_place_spor.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_spor);
-            var reset_place_spor = document.createElement('div');
-            reset_place_spor.innerHTML = 'clear filter';
-            reset_place_spor.className = 'filterlabel';
-            lab_place_spor.className = 'filterlabel';
-            reset_place_spor.onclick = function() {
-                sel_place_spor.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_spor);
-            var sel_place_spor = document.getElementById('div_place_spor');
-            noUiSlider.create(sel_place_spor, {
-                connect: true,
-                start: [NULL, 105],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 105
-                }
-            });
-            sel_place_spor.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_spor = document.getElementById('val_place_spor');
-            val_place_spor.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_natu = document.createElement("div");
-            div_place_natu.id = "div_place_natu";
-            div_place_natu.className = "slider";
-            document.getElementById("menu").appendChild(div_place_natu);
-            var lab_place_natu = document.createElement('div');
-            lab_place_natu.innerHTML  = 'place_natu: <span id="val_place_natu"></span>';
-            lab_place_natu.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_natu);
-            var reset_place_natu = document.createElement('div');
-            reset_place_natu.innerHTML = 'clear filter';
-            reset_place_natu.className = 'filterlabel';
-            lab_place_natu.className = 'filterlabel';
-            reset_place_natu.onclick = function() {
-                sel_place_natu.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_natu);
-            var sel_place_natu = document.getElementById('div_place_natu');
-            noUiSlider.create(sel_place_natu, {
-                connect: true,
-                start: [NULL, 132],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 132
-                }
-            });
-            sel_place_natu.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_natu = document.getElementById('val_place_natu');
-            val_place_natu.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_soun = document.createElement("div");
-            div_place_soun.id = "div_place_soun";
-            div_place_soun.className = "slider";
-            document.getElementById("menu").appendChild(div_place_soun);
-            var lab_place_soun = document.createElement('div');
-            lab_place_soun.innerHTML  = 'place_soun: <span id="val_place_soun"></span>';
-            lab_place_soun.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_soun);
-            var reset_place_soun = document.createElement('div');
-            reset_place_soun.innerHTML = 'clear filter';
-            reset_place_soun.className = 'filterlabel';
-            lab_place_soun.className = 'filterlabel';
-            reset_place_soun.onclick = function() {
-                sel_place_soun.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_soun);
-            var sel_place_soun = document.getElementById('div_place_soun');
-            noUiSlider.create(sel_place_soun, {
-                connect: true,
-                start: [NULL, 79],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 79
-                }
-            });
-            sel_place_soun.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_soun = document.getElementById('val_place_soun');
-            val_place_soun.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_hike = document.createElement("div");
-            div_place_hike.id = "div_place_hike";
-            div_place_hike.className = "slider";
-            document.getElementById("menu").appendChild(div_place_hike);
-            var lab_place_hike = document.createElement('div');
-            lab_place_hike.innerHTML  = 'place_hike: <span id="val_place_hike"></span>';
-            lab_place_hike.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_hike);
-            var reset_place_hike = document.createElement('div');
-            reset_place_hike.innerHTML = 'clear filter';
-            reset_place_hike.className = 'filterlabel';
-            lab_place_hike.className = 'filterlabel';
-            reset_place_hike.onclick = function() {
-                sel_place_hike.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_hike);
-            var sel_place_hike = document.getElementById('div_place_hike');
-            noUiSlider.create(sel_place_hike, {
-                connect: true,
-                start: [NULL, 40],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 40
-                }
-            });
-            sel_place_hike.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_hike = document.getElementById('val_place_hike');
-            val_place_hike.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_smel = document.createElement("div");
-            div_place_smel.id = "div_place_smel";
-            div_place_smel.className = "slider";
-            document.getElementById("menu").appendChild(div_place_smel);
-            var lab_place_smel = document.createElement('div');
-            lab_place_smel.innerHTML  = 'place_smel: <span id="val_place_smel"></span>';
-            lab_place_smel.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_smel);
-            var reset_place_smel = document.createElement('div');
-            reset_place_smel.innerHTML = 'clear filter';
-            reset_place_smel.className = 'filterlabel';
-            lab_place_smel.className = 'filterlabel';
-            reset_place_smel.onclick = function() {
-                sel_place_smel.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_smel);
-            var sel_place_smel = document.getElementById('div_place_smel');
-            noUiSlider.create(sel_place_smel, {
-                connect: true,
-                start: [NULL, 33],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 33
-                }
-            });
-            sel_place_smel.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_smel = document.getElementById('val_place_smel');
-            val_place_smel.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_outd = document.createElement("div");
-            div_place_outd.id = "div_place_outd";
-            div_place_outd.className = "slider";
-            document.getElementById("menu").appendChild(div_place_outd);
-            var lab_place_outd = document.createElement('div');
-            lab_place_outd.innerHTML  = 'place_outd: <span id="val_place_outd"></span>';
-            lab_place_outd.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_outd);
-            var reset_place_outd = document.createElement('div');
-            reset_place_outd.innerHTML = 'clear filter';
-            reset_place_outd.className = 'filterlabel';
-            lab_place_outd.className = 'filterlabel';
-            reset_place_outd.onclick = function() {
-                sel_place_outd.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_outd);
-            var sel_place_outd = document.getElementById('div_place_outd');
-            noUiSlider.create(sel_place_outd, {
-                connect: true,
-                start: [NULL, 203],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 203
-                }
-            });
-            sel_place_outd.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_outd = document.getElementById('val_place_outd');
-            val_place_outd.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_rela = document.createElement("div");
-            div_place_rela.id = "div_place_rela";
-            div_place_rela.className = "slider";
-            document.getElementById("menu").appendChild(div_place_rela);
-            var lab_place_rela = document.createElement('div');
-            lab_place_rela.innerHTML  = 'place_rela: <span id="val_place_rela"></span>';
-            lab_place_rela.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_rela);
-            var reset_place_rela = document.createElement('div');
-            reset_place_rela.innerHTML = 'clear filter';
-            reset_place_rela.className = 'filterlabel';
-            lab_place_rela.className = 'filterlabel';
-            reset_place_rela.onclick = function() {
-                sel_place_rela.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_rela);
-            var sel_place_rela = document.getElementById('div_place_rela');
-            noUiSlider.create(sel_place_rela, {
-                connect: true,
-                start: [NULL, 119],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 119
-                }
-            });
-            sel_place_rela.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_rela = document.getElementById('val_place_rela');
-            val_place_rela.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_place_emot = document.createElement("div");
-            div_place_emot.id = "div_place_emot";
-            div_place_emot.className = "slider";
-            document.getElementById("menu").appendChild(div_place_emot);
-            var lab_place_emot = document.createElement('div');
-            lab_place_emot.innerHTML  = 'place_emot: <span id="val_place_emot"></span>';
-            lab_place_emot.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_place_emot);
-            var reset_place_emot = document.createElement('div');
-            reset_place_emot.innerHTML = 'clear filter';
-            reset_place_emot.className = 'filterlabel';
-            lab_place_emot.className = 'filterlabel';
-            reset_place_emot.onclick = function() {
-                sel_place_emot.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_place_emot);
-            var sel_place_emot = document.getElementById('div_place_emot');
-            noUiSlider.create(sel_place_emot, {
-                connect: true,
-                start: [NULL, 60],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: NULL,
-                max: 60
-                }
-            });
-            sel_place_emot.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_place_emot = document.getElementById('val_place_emot');
-            val_place_emot.innerHTML = values.join(' - ');
-                filterFunc()
-            });
+        }
+        map.createPane('pane_ecosystem_service_sites_clipped_3');
+        map.getPane('pane_ecosystem_service_sites_clipped_3').style.zIndex = 403;
+        map.getPane('pane_ecosystem_service_sites_clipped_3').style['mix-blend-mode'] = 'normal';
+        var layer_ecosystem_service_sites_clipped_3 = new L.geoJson(json_ecosystem_service_sites_clipped_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ecosystem_service_sites_clipped_3',
+            layerName: 'layer_ecosystem_service_sites_clipped_3',
+            pane: 'pane_ecosystem_service_sites_clipped_3',
+            onEachFeature: pop_ecosystem_service_sites_clipped_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ecosystem_service_sites_clipped_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_ecosystem_service_sites_clipped_3);
+        map.addLayer(layer_ecosystem_service_sites_clipped_3);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ecosystem_service_sites_clipped_3.png" /> ecosystem_service_sites_clipped': layer_ecosystem_service_sites_clipped_3,'postal_codes_clipped<br /><table><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placeemot0.png" /></td><td>place_emot</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placehike1.png" /></td><td>place_hike</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placechil2.png" /></td><td>place_chil</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placenao3.png" /></td><td>place_na_o</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placenatu4.png" /></td><td>place_natu</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placeoutd5.png" /></td><td>place_outd</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placepets6.png" /></td><td>place_pets</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placereli7.png" /></td><td>place_reli</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placesmel8.png" /></td><td>place_smel</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placesoci9.png" /></td><td>place_soci</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placesoun10.png" /></td><td>place_soun</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_placespor11.png" /></td><td>place_spor</td></tr><tr><td style="text-align: center;"><img src="legend/postal_codes_clipped_2_12.png" /></td><td></td></tr></table>': layer_postal_codes_clipped_2,"OSM Standard": layer_OSMStandard_1,"ESRI Satellite": layer_ESRISatellite_0,}).addTo(map);
+        setBounds();
         </script>
     </body>
 </html>
